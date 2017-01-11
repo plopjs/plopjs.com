@@ -1,0 +1,20 @@
+.partial-master-footer {
+	.content-wrap {
+		padding: 2rem 0 !important
+		.big-lte & {
+			padding: 2rem 1rem !important
+		}
+	}
+	.footer-right {
+		position: absolute
+		right: 0
+		top: 50%
+		transform: translateY(-50%)
+
+		> span {
+			.med-lte & {
+				display: none
+			}
+		}
+	}
+}

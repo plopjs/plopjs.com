@@ -1,0 +1,44 @@
+.partial-index-features {
+	background-color: $clr-light-gray
+	
+	ul {
+		padding: 0
+		margin: 0
+		font-size: 0
+	}
+
+	.feature {
+		font-size: 1.6rem
+		position: relative
+		display: inline-block
+		list-style: none
+		width: 33.33%
+		vertical-align: top
+		padding: 10px
+		padding-left: 50px
+		.med & { width: 50% }
+		.sml-lte & { width: 100% }
+
+		&:before {
+			content: ''
+			position: absolute
+			top: 0
+			right: 0
+			bottom: 0
+			left: 0
+		}
+
+		h2 {
+			margin-top: 0
+			// padding-left: 1.3em
+		}
+
+		svg.icon {
+			position: absolute
+			height: 30px
+			width: 30px
+			left: 5px
+			// top: calc(20px + 2em)
+		}
+	}
+}

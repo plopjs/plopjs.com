@@ -1,0 +1,26 @@
+<div class="partial-index-example-code"><div class="content-wrap">
+	<h3>Example Plopfile</h3>
+	<pre><code class="javascript">
+module.exports = function (plop) {
+
+  plop.setGenerator('controller', {
+    description: 'application controller',
+
+    // inquirer prompts
+    prompts: [{
+      type: 'input',
+      name: 'name',
+      message: 'Controller name?'
+    }],
+
+    // actions to perform
+    actions: [{
+      type: 'add',
+      path: 'src/controllers/\{{dashCase name}}.js',
+      templateFile: 'templates/controller.hbs',
+    }]
+  });
+
+};
+	</code></pre>
+</div></div>

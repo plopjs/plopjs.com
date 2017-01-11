@@ -1,0 +1,117 @@
+.partial-index-hero {
+	.glass {
+		position: absolute
+		top: 0
+		right: 0
+		bottom: 0
+		left: 0
+		opacity: 1
+	}
+
+	.hero {
+		position: relative
+		height: 300px
+		background-image: url('/images/computer-header.jpg')
+		background-size: cover
+		background-position: 50% 50%
+		min-height: 30rem
+
+		.med-gte & {
+			height: 100vh
+			max-height: 50rem
+		}
+
+		&:before {
+			content: ''
+			position: absolute
+			top: 0
+			right: 0
+			bottom: 0
+			left: 0
+			background: linear-gradient(to bottom,
+			rgba(13, 158, 194, 0.82) 0%,
+			rgba(13, 194, 126, 0.78) 100%
+			)
+		}
+	}
+
+	.header-content {
+		width: 100%
+		height: 150px
+		padding: 10px
+		z-index: 2
+		top: 60px
+
+		.sml-gte & {
+			width: 95%
+			height: 200px
+		}
+		.med-gte & {
+			width: 90%
+			height: 230px
+			max-width: 700px
+		}
+		.lrg-gte & {
+			width: 700px
+		}
+
+		.social-links {
+			font-size: 1.3rem
+			float: right
+			a {
+				color: white
+				display: inline-block
+				vertical-align: middle
+			}
+
+			.med-gte & {
+				font-size: 1.4rem
+				right: 30px
+				top: 30px
+
+				svg.icon {
+					height: 2.3rem
+					width: 2.3rem
+				}
+			}
+
+			svg.icon {
+				height: 1.7rem
+				width: 1.7rem
+				fill: $clr-white
+				margin-left: 1.3rem
+				margin-right: 0.3rem
+			}
+		}
+
+		h1, h2 {
+			margin: 0
+			opacity: 0.9
+				text-shadow: 0 0 0.5em rgba(0,0,0,0.4)
+				color: white
+			}
+
+			h1 {
+				font-family: 'Oswald', sans-serif;
+				font-size: 6rem
+
+				.xsml & { font-size: 3rem }
+				.sml & { font-size: 4rem }
+
+				.cmpt-typing {
+					font-weight: 300
+				}
+			}
+
+			h2 {
+				font-size: 2rem
+				font-weight: 300
+				opacity: 0.7
+					padding-top: 10px
+					padding-bottom: 15px
+					margin-bottom: 15px
+					border-bottom: 1px solid hsla(0, 0, 100, 0.3)
+
+					.med-gte & { font-size: 3rem }
+				}
+				}}

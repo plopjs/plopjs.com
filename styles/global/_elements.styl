@@ -1,0 +1,121 @@
+html {
+	font-size: 62.5% // Now 10px = 1rem!
+}
+
+* {
+	box-sizing: border-box
+}
+
+body {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300
+	margin: 0
+	padding: 0
+	font-size: 1.5rem
+	color: $clr-dark-gray
+}
+
+h1, h2, h3 {
+	font-weight: 300
+	margin-bottom: 0.5em
+	margin-top: 1em
+}
+h4, h5, h6 { font-weight: 500 }
+h2 { font-size: 3rem }
+h3 { font-size: 2rem }
+
+strong {
+	font-weight: 500
+}
+
+a {
+	color: $clr-primary
+	text-decoration: none
+	border-bottom: 1px solid transparent
+
+	&:hover {
+		border-bottom: 1px solid
+	}
+}
+
+p {
+	line-height: 2.5rem
+}
+
+button, .btn {
+	display: inline-block
+	text-align: center
+	font-weight: 300
+	font-size: 1.4rem
+	padding: 1rem 1rem
+	border-radius: 3px
+
+	.med-gte & { min-width: 15rem }
+	.lrg-gte & {
+		padding: 0.7rem 1rem
+	}
+
+	&.primary {
+		color: $clr-white
+		background-color: $clr-primary
+		border: 1px solid darken($clr-primary, 20%)
+	}
+
+	&.secondary {
+		color: $clr-white
+		background-color: transparent
+		border: 1px solid $clr-white
+	}
+}
+
+svg.icon {
+	display: inline-block
+	vertical-align: middle
+	height: 1.5em
+	width: 1.5em
+}
+
+footer {
+	position: relative
+	font-size: 1.3rem
+	color: $clr-white
+	background-color: $clr-dark-gray!important
+	line-height: 1
+
+	a {
+		color: lighten($clr-primary, 50%)
+	}
+
+	span {
+		font-weight: 300
+	}
+
+	strong {
+		font-size: 2.4rem
+	}
+
+	svg.icon {
+		height: 2rem
+		width: 2rem
+		fill: $clr-white
+		margin-left: 1rem
+	}
+
+	.content-wrap {
+		position: relative
+		z-index: 1
+
+		.content {
+			position: relative
+			display: block
+			> * {
+				display: inline-block
+				vertical-align: middle
+			}
+
+			> strong:first-child {
+				.sml & { display: none }
+			}
+		}
+	}
+}

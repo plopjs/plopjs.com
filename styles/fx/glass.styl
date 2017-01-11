@@ -1,0 +1,62 @@
+
+.glass, .glass-dim {
+
+	overflow: hidden
+	position: relative
+
+
+	&:after {
+		content: ''
+		position: absolute
+		top: 0
+		right: -50%
+		bottom: 0
+		left: -50%
+		animation: sliding-after 51s ease-in-out infinite alternate
+		animation-delay: 7s
+		background: linear-gradient(30deg,
+			hsla(0,0,100,0) 0%,
+			hsla(0,0,100,0.2) 35%,
+			hsla(0,0,100,0) 35%,
+			hsla(0,0,100,0) 55%,
+			hsla(0,0,100,0.3) 55%,
+			hsla(0,0,100,0) 100%
+		);
+	}
+
+	&:before {
+		content: ''
+		position: absolute
+		top: 0
+		right: -30%
+		bottom: 0
+		left: -30%
+		animation: sliding-before ease-in-out infinite alternate 25s
+		background: linear-gradient(40deg,
+			hsla(0,0,100,0) 0%,
+			hsla(0,0,100,0) 15%,
+			hsla(0,0,100,0.2) 15%,
+			hsla(0,0,100,0.2) 30%,
+			hsla(0,0,100,0) 30%,
+			hsla(0,0,100,0) 60%,
+			hsla(0,0,100,0.2) 60%,
+			hsla(0,0,100,0.3) 80%,
+			hsla(0,0,100,0) 80%,
+			hsla(0,0,100,0) 100%
+		);
+	}
+}
+
+.glass-dim {
+	&:before, &:after { opacity: 0.15 }
+}
+
+@keyframes sliding-after {
+	0% { transform: translateX(0%) }
+	100% { transform: translateX(25%); }
+}
+
+@keyframes sliding-before {
+	0% { transform: translateX(0%) }
+	100% { transform: translateX(-10%) }
+}
