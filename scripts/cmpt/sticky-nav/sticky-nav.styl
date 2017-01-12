@@ -1,0 +1,100 @@
+.cmpt-enhanced-md {
+
+	h1:first-child {
+		margin-top: 0
+	}
+
+	*[id]:before {
+		content: ''
+		display: block
+		position: relative
+		width: 0
+		height: 70px
+		margin-top: -70px
+	}
+
+	code:not(.hljs) {
+		padding: 3px 6px
+		border-radius: 3px
+		color: $clr-mid-gray
+		background-color: $clr-light-gray
+	}
+	a > code:not(.hljs) {
+		color: $clr-primary
+	}
+
+	h1 {
+		margin-top: 5rem
+		margin-bottom: 2rem
+		padding-bottom: 1rem
+		color: $clr-dark-gray
+		border-bottom: 3px solid $clr-light-gray
+	}
+
+	h2 {
+		margin-top: 4rem
+		margin-bottom: 1rem
+		color: $clr-mid-gray
+		font-size: 2.6rem
+	}
+
+	h1+h2 {
+		margin-top: 1rem
+	}
+
+	h4 {
+		margin-bottom: 0.5rem
+		& + p {
+			margin-top: 0.5rem
+		}
+	}
+
+	em {
+		color: $clr-mid-gray
+	}
+
+	table {
+		border-style: solid
+		border-color: $clr-light-gray
+		border-width: 1px 0 0 1px
+		th, td {
+			padding: 10px 20px
+			border-style: solid
+			border-color: $clr-light-gray
+			border-width: 0 1px 1px 0
+		}
+
+		th {
+			font-weight: normal
+			color: $clr-white
+			background-color: $clr-primary
+		}
+	}
+
+	blockquote {
+		color: $clr-mid-gray
+		font-style: italic
+		margin: 15px 0
+		padding: 0 0 0 30px
+		border-left: 3px solid $clr-light-gray
+	}
+
+	.anchor-link {
+		display: inline-block
+		opacity: 0
+		position: relative
+		margin-left: 0.5rem
+		bottom: 0.2rem
+		transition: opacity 200ms
+
+		svg.icon {
+			fill: $clr-primary
+			height: 2rem
+			width: 2rem
+		}
+	}
+
+	span.header-text:hover + .anchor-link, .anchor-link:hover {
+		opacity: 1
+	}
+}

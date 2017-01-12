@@ -1,1 +1,12 @@
-<nav class="partial-documentation-left-nav" cmpt-header-nav="docs-content"></nav>
+<nav class="partial-documentation-left-nav">
+	{{# each headers as |h key| }}
+	<h4><a href="#{{ h.id }}">{{ h.text }}</a></h4>
+		{{# if h.children.length }}
+		<ul>
+		{{# each h.children as |c cKey| }}
+			<li><a href="#{{ c.id }}">{{ c.text }}</a></li>
+		{{/ each }}
+		</ul>
+		{{/ if }}
+	{{/ each }}
+</nav>

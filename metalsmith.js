@@ -7,10 +7,11 @@ const stylus = require('metalsmith-stylus');
 const browserSync = require('metalsmith-browser-sync');
 const collections = require('metalsmith-collections');
 const nib = require('nib');
+const mdLeftNav = require('./plugins/md-left-nav');
 
 const metalsmith = require('metalsmith');
-
-metalsmith(__dirname)
+console.log(process.env.NODE_ENV);
+var ms = metalsmith(__dirname)
 	.source('./content')
 	.destination('./build')
 	.clean(true)
@@ -21,13 +22,8 @@ metalsmith(__dirname)
 			title: 'Consistency made simple.'
 		});
 	})
-	// .use(collections({
-	// 	docsBasic: {
-	// 		pattern: 'documentation/*.md',
-	// 		sortBy: 'sort'
-	// 	}
-	// }))
 	.use(markdown())
+	.use(mdLeftNav())
 	.use(permalinks({ relative: false }))
 	.use(registerHelpers())
 	.use(layouts({
@@ -36,7 +32,7 @@ metalsmith(__dirname)
 	}))
 	.use(stylus({
 		compress: true,
-		sourcemap: true,
+		sourcemap: process.env.NODE_ENV !== 'production',
 		paths: ['./styles'],
 		use: [nib()]
 	}))
@@ -45,13 +41,13 @@ metalsmith(__dirname)
 			cache: {},
 			packageCache: {},
 			transform: ['uglifyify'],
-			plugin: process.env.NODE_ENV === 'development' ? ['watchify'] : [],
-			debug: process.env.NODE_ENV === 'development'
+			plugin: process.env.NODE_ENV !== 'production' ? ['watchify'] : [],
+			debug: process.env.NODE_ENV !== 'production'
 		}
-		// dest: 'js/main.js',
-		// args: [ 'scripts/index.js' ]
-	}))
-	.use(browserSync({
+	}));
+
+if (process.env.NODE_ENV !== 'production') {
+	ms = ms.use(browserSync({
 		ui: false,
 		files: [
 			'content/**',
@@ -65,7 +61,9 @@ metalsmith(__dirname)
 		port: 5000,
 		ghostMode: false,
 		open: false
-	}))
-	.build(function(err) {
-		if (err) throw err;
-	});
+	}));
+}
+
+ms.build(function(err) {
+	if (err) throw err;
+});

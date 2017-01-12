@@ -9,6 +9,8 @@ Plop is a what I like to call a "micro-generator framework." Now, I call it that
 
 If you boil plop down to its core, it is basically glue code between  [inquirer](https://github.com/SBoudrias/Inquirer.js/) prompts and [handlebar](https://github.com/wycats/handlebars.js/) templates.
 
+> This documentation is a work in progress. If you have great ideas, I'd love to hear them.
+
 ## Installation
 ### 1. Add plop to your project
 ```
@@ -62,29 +64,30 @@ module.exports = function (plop) {
 
 The *controlller* generator we created above will ask us 1 question, and create 1 file. This can be expanded to ask as many questions as needed, and create as many files as needed. There are also additional actions that can be used to alter our codebase in different ways.
 
+## CLI Usage
+Once plop is installed, and you have created a generator, you are ready to run plop from the terminal. Running `plop` with no parameters will present you with a list of generators to pick from. You can also run `plop [generatorName]` to trigger a generator directly.
+
+## Why Generators?
+Because when you create your boilerplate separate from your code, you naturally put more time and thought into it.
+
+Because saving your team (or yourself) 5-15 minutes when creating every route, component, controller, helper, test, view, etc... [really adds up](https://xkcd.com/1205/).
+
+Because [context switching is expensive](http://www.petrikainulainen.net/software-development/processes/the-cost-of-context-switching/) and saving time is not the only [benefit to automating workflows](https://medium.com/@kentcdodds/an-argument-for-automation-fce8394c14e2)
+
 # Plopfile Api
 The plopfile api is the collection of methods that are exposed by the `plop` object. Most of the work is done by [`setGenerator`](#setgenerator) but this section documents the other methods that you may also find useful in your plopfile.
 
 ## Main Methods
+These are the methods you will commonly use when creating a plopfile. Other methods that are mostly for internal use are list in the [other methods](#other-methods) section.
+
 Method | Parameters | Returns | Summary
 ------ | ---------- | ------- | -------
+[**setGenerator**](#setgenerator) | String, [GeneratorConfig](#-interface-generatorconfig-) | *[GeneratorConfig](#-interface-generatorconfig-)* | setup a generator
 [**setHelper**](#sethelper) | String, Function | | setup handlebars helper
 **setPartial** | String, String | | setup a handlebars partial
 **setActionType** | String, Function | | register a 3rd party ActionType
-[**setPrompt**](https://github.com/SBoudrias/Inquirer.js#inquirerregisterpromptname-prompt) | String, InquirerPrompt | | registers a custom prompt type with inquirer
-[**setGenerator**](#setgenerator) | String, [GeneratorConfig](#-interface-generatorconfig-) | *[GeneratorConfig](#-interface-generatorconfig-)* | setup a generator
+[**setPrompt**](#setprompt) | String, InquirerPrompt | | registers a custom prompt type with inquirer
 [**load**](https://github.com/amwmedia/plop/blob/master/plop-load.md) | Array[String], Object, Object | | loads generators, helpers and/or partials from another plopfile or npm module
-
-
-
-		setPlopfilePath, getPlopfilePath, getDestBasePath, load,
-		setPartial, getPartialList, getPartial,
-		setHelper, getHelperList, getHelper,
-		setActionType, getActionTypeList, getActionType,
-		setDefaultInclude, getDefaultInclude
-
-
-
 
 ## setHelper
 `setHelper` directly corresponds to the handlebars method `registerHelper`. So if you are familiar with [handlebars helpers](http://handlebarsjs.com/expressions.html#helpers), then you already know how this works.
@@ -99,6 +102,9 @@ module.exports = function (plop) {
 	plop.setHelper('upperCase', (txt) => txt.toUpperCase());
 };
 ```
+
+## setPrompt
+[Inquirer](https://github.com/SBoudrias/Inquirer.js) provides many types of prompts out of the box, but it also allows developers to build prompt plugins. If you'd like to use a prompt plugin, you can register it with `setPrompt`. For more details see the [Inquirer documentation for registering prompts](https://github.com/SBoudrias/Inquirer.js#inquirerregisterpromptname-prompt). Also check out the [plop community driven list of custom prompts](https://github.com/amwmedia/plop/blob/master/inquirer-prompts.md).
 
 ## setGenerator
 The config object needs to include `prompts` and `actions` (`description` is optional). The prompts array is passed to [inquirer](https://github.com/SBoudrias/Inquirer.js/#objects). The `actions` array is a list of actions to take (described in greater detail below)
@@ -117,7 +123,7 @@ The following properties are the standard properties that plop handles internall
 
 Property | Type | Default | Summary
 -------- | ---- | ------- | -------
-**type** | [String] | | short description of what this generator does
+**type** | String | | the type of action
 **abortOnFail** | Boolean | *true* | if this action fails for any reason abort all future actions
 
 > Instead of an Action Object, a [function can also be used](#custom-action-function-)
@@ -126,16 +132,15 @@ Property | Type | Default | Summary
 Method | Parameters | Returns | Summary
 ------ | ---------- | ------- | -------
 **getHelper** | String | *Function* | get the helper function
+**getHelperList** | | *Array[String]* | get a list of helper names
 **getPartial** | String | *String* | get a handlebars partial by name
-**getActionType** | String | *Function* | get the 3rd party ActionType function
+**getPartialList** | | *Array[String]* | get a list of partial names
 **getGenerator** | String | *[GeneratorConfig](#-interface-generatorconfig-)* | get the [GeneratorConfig](#-interface-generatorconfig-) by name
-**getPlopfilePath** | | *String* | returns the absolute path to the plopfile in use
-**renderString** | String, Object | *String* | Runs the first parameter (*String*) through the handlebars template renderer using the second parameter (*Object*) as the data. Returns the rendered template.
 **getGeneratorList** | | *Array[Object]* | gets an array of generator names and descriptions
-
-
-### Actions Function
-Instead of providing an array of [Action](#-interface-action-)s to your [GeneratorConfig](#-interface-generatorconfig-), you can provide a function that returns an array of [Action](#-interface-action-)s. This allows your generator to change what actions are run based on the answers provided to the prompts. The answers object will be provided as the first parameter to this function.
+**setPlopfilePath** | String | | set the `plopfilePath` value which is used internally to locate resources like template files
+**getPlopfilePath** | | *String* | returns the absolute path to the plopfile in use
+**getDestBasePath** | | *String* | returns the base path that is used when creating files
+**renderString** | String, Object | *String* | Runs the first parameter (*String*) through the handlebars template renderer using the second parameter (*Object*) as the data. Returns the rendered template.
 
 # Built-In Actions
 There are two types of built-in actions you can include (add and modify). Both types of actions require a path to take action on (all paths are based on the location of the plopfile), and a template to use.
@@ -212,35 +217,3 @@ module.exports = function (plop) {
 	});
 };
 ```
----
-
-# Other Plop Methods/Attributes
-These methods and attributes are available off the `plop` object. They are mostly used by plop internally, but some can come in handy when you're doing something a little more custom.
-
-
-
-#### plop.inquirer
-The instance of inquirer that plop is using internally.
-
-#### plop.handlebars
-The instance of handlebars that plop is using internally.
-
----
----
-
-# Usage
-Once plop is installed, and you have created a generator, you are ready to run plop from the terminal. Running `plop` with no parameters will present you with a list of generators to pick from. You can also run `plop [generatorName]` to trigger a generator directly.
-
----
-
-# Why?
-Because when you create your boilerplate separate from your code, you naturally put more time and thought into it.
-
-Because saving your team (or yourself) 5-15 minutes when creating every route, component, controller, helper, test, view, etc... [really adds up](https://xkcd.com/1205/).
-
-Because [context switching is expensive](http://www.petrikainulainen.net/software-development/processes/the-cost-of-context-switching/) and [saving time is not the only benefit to automating workflows](https://medium.com/@kentcdodds/an-argument-for-automation-fce8394c14e2)
-
-### Why Not Yeoman?
-Yeoman is great and it does a fantastic job of scaffolding out an initial codebase for you. However, the initial codebase is just the beginning. I believe the true benefit to generators is not realized by saving a developer 40 hours in the beginning, but by saving a team days of work over the life of the project. Yes, yeoman has sub generators that do a similar job. However, if you're like me, you will continually tweak structure and code throughout the project till the sub generators that came built into your yeoman seed are no longer valid. These structures change as requirements change and code is refactored. Plop allows your generator code to live INSIDE your project and be versioned right along with the code it generates.
-
-If you already have another generator that your organization uses and loves, use it :-). If you don't, try plop. It will make your code more consistent, save you lots of time, and (if you've read this far) you already know how to use it.
