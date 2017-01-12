@@ -8,9 +8,9 @@ const browserSync = require('metalsmith-browser-sync');
 const collections = require('metalsmith-collections');
 const nib = require('nib');
 const mdLeftNav = require('./plugins/md-left-nav');
+const ghContributors = require('./plugins/gh-contributors');
 
 const metalsmith = require('metalsmith');
-console.log(process.env.NODE_ENV);
 var ms = metalsmith(__dirname)
 	.source('./content')
 	.destination('./build')
@@ -22,6 +22,7 @@ var ms = metalsmith(__dirname)
 			title: 'Consistency made simple.'
 		});
 	})
+	.use(ghContributors())
 	.use(markdown())
 	.use(mdLeftNav())
 	.use(permalinks({ relative: false }))
