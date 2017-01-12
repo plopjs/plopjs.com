@@ -1,4 +1,5 @@
 .layout-documentation {
+
 	.content-wrap {
 		padding-top: 0
 		> * {
@@ -7,7 +8,11 @@
 		}
 	}
 
-	.docs-content {
-		width: calc(100% - 220px)
+	.partial-documentation-left-nav { width: 215px }
+	&.med-lte .partial-documentation-left-nav {
+		width: 100%
+		padding-right: 0
 	}
+	.docs-content { width: calc(100% - 220px) }
+	&.med-lte .docs-content { width: 100% }
 }
