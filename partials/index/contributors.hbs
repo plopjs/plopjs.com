@@ -1,12 +1,13 @@
 <div class="partial-index-contributors">
 	<div class="content-wrap">
 		<h2>Big Thanks to All Contributors!</h2>
-		<ul>{{# each contributors as |c idx| }}<!--
-		--><li class="contributor-avatar" title="{{ c.login }}"><!--
-		--><a href="{{ c.html_url }}" target="_blank"><!--
-			--><img src="{{ c.avatar_url }}" alt="{{ c.login }}"><!--
-		--></a><!--
-		--></li>{{/ each }}
+		<ul>{{# each contributors as |c idx| }}
+			<li class="contributor-avatar" title="{{ c.login }}">
+				<a href="{{ c.html_url }}" target="_blank">
+					<img src="/images/avatars/{{ c.login }}.jpg" alt="{{ c.login }}">
+				</a>
+			</li>
+			{{/ each }}
 		</ul>
 	</div>
 </div>

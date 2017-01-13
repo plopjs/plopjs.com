@@ -1,4 +1,7 @@
 const https = require('https');
+const fs = require('fs');
+const path = require('path');
+
 module.exports = function (config) {
 	return function (files, metalsmith, done) {
 		var meta = metalsmith.metadata();
@@ -21,6 +24,15 @@ module.exports = function (config) {
 			res.on('data', function (chunk) { body += chunk; });
 			res.on('end', function () {
 				meta.contributors = JSON.parse(body);
+				meta.contributors.forEach(function (c) {
+					var avatarFile = fs.createWriteStream(path.resolve(__dirname, '../content/images/avatars', c.login + '.jpg'));
+					var request = https.get({
+						host: 'avatars.githubusercontent.com',
+						path: '/u/' + c.id + '?v=3',
+						headers: {'user-agent': 'Mozilla/5.0'}
+					}, function(response) { response.pipe(avatarFile); });
+				});
+
 				if (meta.contributors.length === 0) {
 					console.log(body);
 				} else {

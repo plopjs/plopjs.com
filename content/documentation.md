@@ -1,4 +1,5 @@
 ---
+title: Learning to Plop
 layout: documentation.hbs
 ---
 

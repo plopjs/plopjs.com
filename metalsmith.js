@@ -6,7 +6,9 @@ const browserify = require('metalsmith-browserify-alt');
 const stylus = require('metalsmith-stylus');
 const browserSync = require('metalsmith-browser-sync');
 const collections = require('metalsmith-collections');
+const htmlMinify = require('metalsmith-html-minifier');
 const nib = require('nib');
+// custom plugins
 const mdLeftNav = require('./plugins/md-left-nav');
 const ghContributors = require('./plugins/gh-contributors');
 
@@ -19,7 +21,8 @@ var ms = metalsmith(__dirname)
 		setImmediate(done);
 		metalsmith.metadata({
 			name: 'PLOP',
-			title: 'Consistency made simple.'
+			title: 'Consistency made simple.',
+			production: process.env.NODE_ENV === 'production'
 		});
 	})
 	.use(ghContributors())
@@ -31,6 +34,7 @@ var ms = metalsmith(__dirname)
 		engine: 'handlebars',
 		partials: 'partials'
 	}))
+	.use(htmlMinify())
 	.use(stylus({
 		compress: true,
 		sourcemap: process.env.NODE_ENV !== 'production',

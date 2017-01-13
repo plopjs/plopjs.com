@@ -29,6 +29,7 @@
     "metalsmith-browserify": "^0.1.2",
     "metalsmith-browserify-alt": "^1.0.1",
     "metalsmith-collections": "^0.9.0",
+    "metalsmith-html-minifier": "^2.2.0",
     "metalsmith-layouts": "^1.4.1",
     "metalsmith-markdown": "^0.2.1",
     "metalsmith-permalinks": "^0.5.0",
