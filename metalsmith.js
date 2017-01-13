@@ -21,7 +21,7 @@ var ms = metalsmith(__dirname)
 		setImmediate(done);
 		metalsmith.metadata({
 			name: 'PLOP',
-			title: 'Consistency made simple.',
+			title: 'Consistency Made Simple',
 			production: process.env.NODE_ENV === 'production'
 		});
 	})
