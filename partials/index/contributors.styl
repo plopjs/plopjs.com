@@ -8,17 +8,12 @@
 	}
 	.contributor-avatar {
 		$size = 20%
-		$small-size = 12.5%
+		$small-size = 15%
 
-		width: $size
-		height: $size
 		display: inline-block
 		vertical-align: middle
-
-		&:not(.shout-out) + .shout-out:before {
-			content: '\A'
-			white-space: pre
-		}
+		width: $size
+		height: $size
 
 		&.shout-out {
 			width: $small-size
