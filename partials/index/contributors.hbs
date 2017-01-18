@@ -1,13 +1,21 @@
 <div class="partial-index-contributors">
 	<div class="content-wrap">
 		<h2>Big Thanks to All Contributors!</h2>
-		<ul>{{# each contributors as |c idx| }}
+		<ul>{{#each contributors as |c idx|}}{{#if (greater-than c.contributions 2)}}
 			<li class="contributor-avatar" title="{{ c.login }}">
 				<a href="{{ c.html_url }}" target="_blank">
 					<img src="/images/avatars/{{ c.login }}.jpg" alt="{{ c.login }}">
 				</a>
 			</li>
-			{{/ each }}
+			{{/if}}{{/each}}
+		</ul>
+		<ul>{{#each contributors as |c idx|}}{{#if (less-than c.contributions 3)}}
+			<li class="contributor-avatar shout-out" title="{{ c.login }}">
+				<a href="{{ c.html_url }}" target="_blank">
+					<img src="/images/avatars/{{ c.login }}.jpg" alt="{{ c.login }}">
+				</a>
+			</li>
+			{{/if}}{{/each}}
 		</ul>
 	</div>
 </div>
