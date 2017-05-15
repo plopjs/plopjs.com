@@ -84,27 +84,28 @@ These are the methods you will commonly use when creating a plopfile. Other meth
 Method | Parameters | Returns | Summary
 ------ | ---------- | ------- | -------
 [**setGenerator**](#setgenerator) | String, [GeneratorConfig](#-interface-generatorconfig-) | *[GeneratorConfig](#-interface-generatorconfig-)* | setup a generator
-[**addHelper**](#addhelper) | String, Function | | setup handlebars helper
-**addPartial** | String, String | | setup a handlebars partial
-[**addPrompt**](#addprompt) | String, InquirerPrompt | | registers a custom prompt type with inquirer
+[**setHelper**](#sethelper) | String, Function | | setup handlebars helper
+**setPartial** | String, String | | setup a handlebars partial
+**setActionType** | String, Function | | register a 3rd party ActionType
+[**setPrompt**](#setprompt) | String, InquirerPrompt | | registers a custom prompt type with inquirer
 [**load**](https://github.com/amwmedia/plop/blob/master/plop-load.md) | Array[String], Object, Object | | loads generators, helpers and/or partials from another plopfile or npm module
 
-## addHelper
-`addHelper` directly corresponds to the handlebars method `registerHelper`. So if you are familiar with [handlebars helpers](http://handlebarsjs.com/expressions.html#helpers), then you already know how this works.
+## setHelper
+`setHelper` directly corresponds to the handlebars method `registerHelper`. So if you are familiar with [handlebars helpers](http://handlebarsjs.com/expressions.html#helpers), then you already know how this works.
 
 ``` javascript
 module.exports = function (plop) {
-	plop.addHelper('upperCase', function (text) {
+	plop.setHelper('upperCase', function (text) {
 		return text.toUpperCase();
 	});
 
 	// or in es6/es2015
-	plop.addHelper('upperCase', (txt) => txt.toUpperCase());
+	plop.setHelper('upperCase', (txt) => txt.toUpperCase());
 };
 ```
 
-## addPrompt
-[Inquirer](https://github.com/SBoudrias/Inquirer.js) provides many types of prompts out of the box, but it also allows developers to build prompt plugins. If you'd like to use a prompt plugin, you can register it with `addPrompt`. For more details see the [Inquirer documentation for registering prompts](https://github.com/SBoudrias/Inquirer.js#inquirerregisterpromptname-prompt). Also check out the [plop community driven list of custom prompts](https://github.com/amwmedia/plop/blob/master/inquirer-prompts.md).
+## setPrompt
+[Inquirer](https://github.com/SBoudrias/Inquirer.js) provides many types of prompts out of the box, but it also allows developers to build prompt plugins. If you'd like to use a prompt plugin, you can register it with `setPrompt`. For more details see the [Inquirer documentation for registering prompts](https://github.com/SBoudrias/Inquirer.js#inquirerregisterpromptname-prompt). Also check out the [plop community driven list of custom prompts](https://github.com/amwmedia/plop/blob/master/inquirer-prompts.md).
 
 ## setGenerator
 The config object needs to include `prompts` and `actions` (`description` is optional). The prompts array is passed to [inquirer](https://github.com/SBoudrias/Inquirer.js/#objects). The `actions` array is a list of actions to take (described in greater detail below)
@@ -131,6 +132,7 @@ Property | Type | Default | Summary
 ## Other Methods
 Method | Parameters | Returns | Summary
 ------ | ---------- | ------- | -------
+**getHelper** | String | *Function* | get the helper function
 **getHelperList** | | *Array[String]* | get a list of helper names
 **getPartial** | String | *String* | get a handlebars partial by name
 **getPartialList** | | *Array[String]* | get a list of partial names
