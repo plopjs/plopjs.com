@@ -233,11 +233,11 @@ Property | Type | Default | Description
 **abortOnFail** | | | *inherited from [ActionConfig](#-interface-actionconfig-)*
 
 ## AddMany
-The `addMany` action can be used to add multiple files to your project with a single action. The `destination` property is a handlebars template that will be used to identify the folder that the generated files should go into. The `base` property  can be used to alter what section of the template paths should be omitted when creating files.
+The `addMany` action can be used to add multiple files to your project with a single action. The `destination` property is a handlebars template that will be used to identify the folder that the generated files should go into. The `base` property  can be used to alter what section of the template paths should be omitted when creating files. The paths located by the `templateFiles` glob can use handlebars syntax in their file/folder names if you'd like the added file names to be unique (example: `{{ dashCase name }}.spec.js`).
 
 Property | Type | Default | Description
 -------- | ---- | ------- | -----------
-**destination** | *String* | | a handlebars template that (when rendered) is the path of the new file
+**destination** | *String* | | a handlebars template that (when rendered) is the destination folder for the new files
 **base** | *String* | | the section of the path that should be excluded when adding files to the `destination` folder
 **templateFiles** | *[Glob](https://github.com/sindresorhus/globby#globbing-patterns)* | | glob pattern that matches multiple template files to be added
 **abortOnFail** | | | *inherited from [ActionConfig](#-interface-actionconfig-)*
