@@ -233,12 +233,12 @@ Property | Type | Default | Description
 **abortOnFail** | | | *inherited from [ActionConfig](#-interface-actionconfig-)*
 
 ## AddMany
-The `addMany` action can be used to add multiple files to your project with a single action. The path property is a handlebars template that will be used to create the file by name. The file contents will be determined by the `template` or `templateFile` property. As you've probably guessed, the `template` property is used for an inline template while the `templateFile` is a path to the template stored in a file somewhere else in the project. I suggest keeping your template files in a `plop-templates` folder at the root of the project.
+The `addMany` action can be used to add multiple files to your project with a single action. The `destination` property is a handlebars template that will be used to identify the folder that the generated files should go into. The `base` property  can be used to alter what section of the template paths should be omitted when creating files.
 
 Property | Type | Default | Description
 -------- | ---- | ------- | -----------
 **destination** | *String* | | a handlebars template that (when rendered) is the path of the new file
-**base** | *String* | | path that should be excluded when adding files to the `destination`
+**base** | *String* | | the section of the path that should be excluded when adding files to the `destination` folder
 **templateFiles** | *[Glob](https://github.com/sindresorhus/globby#globbing-patterns)* | | glob pattern that matches multiple template files to be added
 **abortOnFail** | | | *inherited from [ActionConfig](#-interface-actionconfig-)*
 
