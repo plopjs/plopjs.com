@@ -2,12 +2,17 @@
 title: Learning to Plop
 layout: documentation.hbs
 ---
-
 # Getting Started
-`plop v1.8.0`
+`plop v1.9.0`
+
+[![npm](https://img.shields.io/npm/dm/plop.svg)](https://www.npmjs.com/package/plop)
+&nbsp;
+[![npm](https://img.shields.io/npm/v/plop.svg)](https://www.npmjs.com/package/plop)
+&nbsp;
+[![plop on slack](https://plopjs-slack-rjjmojauhb.now.sh/badge.svg)](https://plopjs-slack-rjjmojauhb.now.sh/)
 
 ## What is Plop?
-Plop is a what I like to call a "micro-generator framework." Now, I call it that because it is a small tool that gives you a simple way to generate code or any other type of flat text files in a consistent way. You see, we all create structures and patterns in our code (routes, controllers, components, helpers, etc). These patterns change and improve over time so when you need to create a NEW *insert-name-of-pattern-here*, it's not always easy to locate the files in your codebase that represent the current "best practice." That's where plop saves you. With plop, you have your "best practice" method of creating any given pattern in CODE. Code that you can easily engage from the terminal by simply typing `plop`. Not only does this save you from hunting around in your codebase for the right files to copy, but it also turns "the right way" into "the easiest way" to make new files.
+Plop is what I like to call a "micro-generator framework." Now, I call it that because it is a small tool that gives you a simple way to generate code or any other type of flat text files in a consistent way. You see, we all create structures and patterns in our code (routes, controllers, components, helpers, etc). These patterns change and improve over time so when you need to create a NEW *insert-name-of-pattern-here*, it's not always easy to locate the files in your codebase that represent the current "best practice." That's where plop saves you. With plop, you have your "best practice" method of creating any given pattern in CODE. Code that can easily be run from the terminal by typing `plop`. Not only does this save you from hunting around in your codebase for the right files to copy, but it also turns "the right way" into "the easiest way" to make new files.
 
 If you boil plop down to its core, it is basically glue code between  [inquirer](https://github.com/SBoudrias/Inquirer.js/) prompts and [handlebar](https://github.com/wycats/handlebars.js/) templates.
 
@@ -35,7 +40,7 @@ module.exports = function (plop) {
 ```
 
 ## Your First Plopfile
-A plopfile starts its life as a lowly node module that exports a function that accepts the `plop` object as its first parameter.
+A plopfile starts its life as a lowly node module that exports a function which accepts the `plop` object as its first parameter.
 
 ``` javascript
 module.exports = function (plop) {};
@@ -67,7 +72,20 @@ module.exports = function (plop) {
 The *controlller* generator we created above will ask us 1 question, and create 1 file. This can be expanded to ask as many questions as needed, and create as many files as needed. There are also additional actions that can be used to alter our codebase in different ways.
 
 ## CLI Usage
-Once plop is installed, and you have created a generator, you are ready to run plop from the terminal. Running `plop` with no parameters will present you with a list of generators to pick from. You can also run `plop [generatorName]` to trigger a generator directly.
+Once plop is installed, and you have created a generator, you are ready to run plop from the terminal. Running `plop` with no parameters will present you with a list of generators to pick from. You can also run `plop [generatorName]` to trigger a generator directly. If you did not install plop globally, you will need to setup an npm script to run plop for you.
+
+### Bypassing Prompts
+Once you get to know a project (and its generators) well, you may want to provide answers to the prompts when you run the generator. If I have (for instance) a `component` generator that has one prompt (name), I can run that generator using `plop component "some component name"` and it will immediately execute as though I had typed "some component name" into the prompt. If that same generator had a second prompt, the same input would have resulted in the user being prompted for the second value.
+
+Prompts like `confirm` and `list` try to make sense of your input as best they can. For instance entering "y", "yes", "t", or "true" for a confirm prompt will result in a boolean `true` value. You can select items from a list using their value, index, key, or name. Checkbox prompts can accept a comma separated list of values in order to select multiples.
+
+![plop bypass demo](https://media.giphy.com/media/3ov9jQ38ypmX4SuT60/giphy.gif)
+
+> If you want to provide bypass input for the second prompt but not the first, you can use an underscore "\_" to skip the bypass (ie `plop component _ "input for second prompt"`).
+
+Plop comes with bypass logic built-in for standard inquirer prompts, but there are also ways to provide custom logic for how to handle user input for a specific prompt.
+
+If you have published a 3rd party inquirer prompt plugin and would like to support bypass functionality for plop users out of the box, that is covered in [another section of this documentation](#3rd-party-prompt-bypass).
 
 ## Why Generators?
 Because when you create your boilerplate separate from your code, you naturally put more time and thought into it.
@@ -210,6 +228,7 @@ Method | Parameters | Returns | Description
 **getPartialList** | | *Array[String]* | get a list of partial names
 **getActionType** | String | *[CustomAction](#-functionsignature-custom-action)* | get an actionType by name
 **getActionTypeList** | | *Array[String]* | get a list of actionType names
+**setWelcomeMessage** | String | | Customizes the displayed message that asks you to choose a generator when you run `plop`.
 **getGenerator** | String | *[GeneratorConfig](#-interface-generatorconfig-)* | get the [GeneratorConfig](#-interface-generatorconfig-) by name
 **getGeneratorList** | | *Array[Object]* | gets an array of generator names and descriptions
 **setPlopfilePath** | String | | set the `plopfilePath` value which is used internally to locate resources like template files
@@ -282,10 +301,10 @@ There are a few helpers that I have found useful enough to include with plop. Th
 
 # Taking it Further
 
-There is not a lot needed to get up and running on some basic generators. However, if you want to take your plop-fu futher, read on young padawan.
+There is not a lot needed to get up and running on some basic generators. However, if you want to take your plop-fu further, read on young padawan.
 
 ## Using a Dynamic Actions Array
-Alternatively, the `actions` property of the [GeneratorConfig](#-interface-generatorconfig-) can itself be a function that takes the answers data as a parameter and return the actions array.
+Alternatively, the `actions` property of the [GeneratorConfig](#-interface-generatorconfig-) can itself be a function that takes the answers data as a parameter and returns the actions array.
 
 This allows you to adapt the actions array based on provided answers:
 
@@ -319,3 +338,27 @@ module.exports = function (plop) {
 	});
 };
 ```
+
+## 3rd Party Prompt Bypass
+If you have written an inquirer prompt plugin and want to support plop's bypass functionality, the process is pretty simple. The plugin object that your prompt exports should have a `bypass` function. This `bypass` function will be run by plop with the user's input as the first parameter and the prompt config object as the second parameter. The value that this function returns will be added to the answer data object for that prompt.
+
+``` javascript
+// My confirmation inquirer plugin
+module.exports = MyConfirmPluginConstructor;
+function MyConfirmPluginConstructor() {
+	// ...your main plugin code
+	this.bypass = (rawValue, promptConfig) => {
+		const lowerVal = rawValue.toString().toLowerCase();
+		const trueValues = ['t', 'true', 'y', 'yes'];
+		const falseValues = ['f', 'false', 'n', 'no'];
+		if (trueValues.includes(lowerVal)) return true;
+		if (falseValues.includes(lowerVal)) return false;
+		throw Error(`"${rawValue}" is not a valid ${promptConfig.type} value`);
+	};
+	return this;
+}
+```
+> For the above example, the bypass function takes the user's text input and turns it into a `Boolean` value that will be used as the prompt answer data.
+
+### Adding Bypass Support to Your Plopfile
+If the 3rd party prompt plugin you are using does not support bypass by default, you can add the `bypass` function above to your prompt's config object and plop will use it for handling bypass data for that prompt.
