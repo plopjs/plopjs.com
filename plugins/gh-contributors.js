@@ -67,6 +67,14 @@ module.exports = function (config) {
 
 			meta.contributors = contributors;
 
+			fs.writeFile(
+				path.resolve(__dirname, './mock-contributors.json'),
+				JSON.stringify(contributors),
+				err => {
+					if (err != null) { console.error(err); }
+				}
+			);
+
 			// go update the avatar images
 			const host = 'avatars.githubusercontent.com';
 			const headers = {'user-agent': 'Mozilla/5.0'};
