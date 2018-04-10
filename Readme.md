@@ -1,6 +1,5 @@
 
-# static-site
+# Plopjs.com
 
-This example uses Metalsmith to make a static site. To test it out yourself just run:
-
-    $ make build
+- Devlopment: `npm run develop`
+- Production Build: `npm run build`
