@@ -12,11 +12,10 @@
     "type": "git",
     "url": "git+https://amwmedia@github.com/amwmedia/plopjs.com.git"
   },
-  "keywords": [
-    "plop"
-  ],
+  "keywords": ["plop"],
   "author": "Andrew Worcester",
   "license": "MIT",
+  "homepage": "https://github.com/amwmedia/plopjs.com#readme",
   "bugs": {
     "url": "https://github.com/amwmedia/plopjs.com/issues"
   },
@@ -38,8 +37,9 @@
     "metalsmith-stylus": "^2.0.1",
     "metalsmith-uglifyjs": "^0.2.2",
     "nib": "^1.1.2",
+    "plop": "^2.0.0",
     "uglifyify": "^3.0.4",
     "watchify": "^3.8.0"
   },
-  "homepage": "https://github.com/amwmedia/plopjs.com#readme"
+  "dependencies": {}
 }

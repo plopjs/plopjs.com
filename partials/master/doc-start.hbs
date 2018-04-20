@@ -3,9 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>{{ title }} : {{ name }}</title>
-	{{#if description }}<meta name="description" content="{{ description }}">{{/if }}
-	{{> master/app-icon-tags }}
 	<link rel="stylesheet" href="/styles.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	{{> master/meta-and-icons }}
 </head>
 <body class="layout-{{ basename filename }} xlrg-lte lrg-lte lrg-gte lrg big-gte med-gte sml-gte xsml-gte">
