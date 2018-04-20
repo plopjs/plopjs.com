@@ -4,7 +4,7 @@
   "description": "plopjs.com website",
   "private": true,
   "scripts": {
-    "build": "NODE_ENV=production NODE_VERSION=8.9.4 node metalsmith.js",
+    "build": "NODE_ENV=production node metalsmith.js",
     "develop": "node metalsmith.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

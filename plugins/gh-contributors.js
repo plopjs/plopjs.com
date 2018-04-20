@@ -2,6 +2,7 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 const repos = ['plop', 'node-plop'];
+const blacklist = ['greenkeeper[bot]'];
 
 module.exports = function (config) {
 	return function (files, metalsmith, done) {
@@ -44,16 +45,18 @@ module.exports = function (config) {
 
 			repos.forEach(function (repo) {
 				if (contributors == null) {
-					contributors = data[repo];
+					contributors = data[repo].filter(c => !blacklist.includes(c.login));
 				} else {
-					data[repo].forEach(function (contributor) {
-						const existingC = contributors.find(c => c.login === contributor.login);
-						if (existingC == null) {
-							contributors.push(contributor);
-						} else {
-							existingC.contributions += contributor.contributions;
-						}
-					});
+					data[repo]
+						.filter(c => !blacklist.includes(c.login))
+						.forEach(function (contributor) {
+							const existingC = contributors.find(c => c.login === contributor.login);
+							if (existingC == null) {
+								contributors.push(contributor);
+							} else {
+								existingC.contributions += contributor.contributions;
+							}
+						});
 				}
 			});
 
