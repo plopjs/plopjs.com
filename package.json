@@ -4,7 +4,7 @@
   "description": "plopjs.com website",
   "private": true,
   "scripts": {
-    "build": "NODE_ENV=production node metalsmith.js",
+    "build": "NODE_ENV=production NODE_VERSION=8.9.4 node metalsmith.js",
     "develop": "node metalsmith.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,9 +18,6 @@
   "homepage": "https://github.com/amwmedia/plopjs.com#readme",
   "bugs": {
     "url": "https://github.com/amwmedia/plopjs.com/issues"
-  },
-  "engines": {
-    "node": ">=8.9.4"
   },
   "devDependencies": {
     "browserify": "^13.1.1",
