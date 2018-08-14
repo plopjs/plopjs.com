@@ -21,9 +21,8 @@
   "bugs": {
     "url": "https://github.com/amwmedia/plopjs.com/issues"
   },
-  "devDependencies": {
+  "dependencies": {
     "browserify": "^16.2.2",
-    "chokidar-cli": "^1.2.0",
     "handlebars": "^4.0.5",
     "metalsmith": "^2.1.0",
     "metalsmith-browser-sync": "^1.1.1",
@@ -39,9 +38,11 @@
     "metalsmith-stylus": "^3.0.0",
     "metalsmith-uglifyjs": "^0.2.2",
     "nib": "^1.1.2",
-    "plop": "^2.1.0",
-    "uglifyify": "^5.0.1",
-    "watchify": "^3.8.0"
+    "uglifyify": "^5.0.1"
   },
-  "dependencies": {}
+  "devDependencies": {
+    "plop": "^2.1.0",
+    "chokidar-cli": "^1.2.0",
+    "watchify": "^3.8.0"
+  }
 }
