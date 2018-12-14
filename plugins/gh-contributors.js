@@ -1,7 +1,7 @@
 const https = require('https');
 const fs = require('fs');
 const path = require('path');
-const repos = ['plop', 'node-plop'];
+const repos = ['plop', 'node-plop', 'plopjs.com'];
 const blacklist = ['greenkeeper[bot]'];
 
 module.exports = function (config) {
