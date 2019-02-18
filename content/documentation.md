@@ -3,7 +3,7 @@ title: Learning to Plop
 layout: documentation.hbs
 ---
 # Getting Started
-`plop v2.2.0`
+`plop v2.2.1`
 
 # Getting Started
 [![npm](https://img.shields.io/npm/dm/plop.svg)](https://www.npmjs.com/package/plop)
