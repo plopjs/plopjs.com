@@ -5,7 +5,6 @@ layout: documentation.hbs
 # Getting Started
 `plop v2.3.0`
 
-# Getting Started
 [![npm](https://img.shields.io/npm/dm/plop.svg)](https://www.npmjs.com/package/plop)
 &nbsp;
 [![npm](https://img.shields.io/npm/v/plop.svg)](https://www.npmjs.com/package/plop)
