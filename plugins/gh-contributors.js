@@ -1,7 +1,7 @@
 const https = require('https');
 const fs = require('fs');
 const path = require('path');
-const repos = ['plop', 'node-plop', 'plopjs.com'];
+const repos = ['amwmedia/plop', 'amwmedia/node-plop', 'plopjs/plopjs.com'];
 const blacklist = ['greenkeeper[bot]'];
 
 module.exports = function (config) {
@@ -19,7 +19,7 @@ module.exports = function (config) {
 		repos.forEach(function (repoName) {
 			const requestConfig = {
 				host: 'api.github.com',
-				path: `/repos/amwmedia/${repoName}/contributors`,
+				path: `/repos/${repoName}/contributors`,
 				headers: {'user-agent': 'Mozilla/5.0'}
 			};
 
