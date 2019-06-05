@@ -91,7 +91,7 @@ module.exports = function (config) {
 			contributors.forEach(function (c) {
 				const imgPath = path.join(avatarDir, c.login + '.jpg');
 				var avatarFile = fs.createWriteStream(imgPath);
-				const avatarCompress = sharp().resize(200, 200).jpeg({quality: 90});
+				const avatarCompress = sharp().resize(200, 200).jpeg({quality: 85, progressive: true});
 				avatarFile.on('finish', () => (--avatarCount === 0 ? done() : null));
 				var request = https.get(
 					{host, headers, path:`/u/${c.id}?v=3`},
