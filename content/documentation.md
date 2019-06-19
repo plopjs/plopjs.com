@@ -3,7 +3,7 @@ title: Learning to Plop
 layout: documentation.hbs
 ---
 # Getting Started
-`plop v2.3.0`
+`plop v2.4.0`
 
 [![npm](https://img.shields.io/npm/dm/plop.svg)](https://www.npmjs.com/package/plop)
 &nbsp;
@@ -69,13 +69,24 @@ module.exports = function (plop) {
 };
 ```
 
-The *controlller* generator we created above will ask us 1 question, and create 1 file. This can be expanded to ask as many questions as needed, and create as many files as needed. There are also additional actions that can be used to alter our codebase in different ways.
+The *controller* generator we created above will ask us 1 question, and create 1 file. This can be expanded to ask as many questions as needed, and create as many files as needed. There are also additional actions that can be used to alter our codebase in different ways.
 
 ## Using Prompts
 Plop uses the [inquirer.js](https://github.com/SBoudrias/Inquirer.js) library to gather user data. A list of [prompt types](https://github.com/SBoudrias/Inquirer.js/#prompt-types) can be found on the inquirer official website.
 
 ## CLI Usage
 Once plop is installed, and you have created a generator, you are ready to run plop from the terminal. Running `plop` with no parameters will present you with a list of generators to pick from. You can also run `plop [generatorName]` to trigger a generator directly. If you did not install plop globally, you will need to setup an npm script to run plop for you.
+
+```javascript
+// package.json
+{
+    ...,
+    "scripts": {
+        "plop": "plop"
+    },
+    ...
+}
+```
 
 ### Bypassing Prompts
 Once you get to know a project (and its generators) well, you may want to provide answers to the prompts when you run the generator. If I have (for instance) a `component` generator that has one prompt (name), I can run that generator using `plop component "some component name"` and it will immediately execute as though I had typed "some component name" into the prompt. If that same generator had a second prompt, the same input would have resulted in the user being prompted for the second value.
@@ -286,6 +297,7 @@ Property | Type | Default | Description
 **destination** | *String* | | a handlebars template that (when rendered) is the destination folder for the new files
 **base** | *String* | | the section of the path that should be excluded when adding files to the `destination` folder
 **templateFiles** | *[Glob](https://github.com/sindresorhus/globby#globbing-patterns)* | | glob pattern that matches multiple template files to be added
+**stripExtensions** | *[String]* | `['hbs']` | file extensions that should be stripped from `templateFiles` files names while being added to the `destination`
 **globOptions** | *[Object](https://github.com/sindresorhus/globby#options)* | | glob options that change how to match to the template files to be added
 **verbose** | *Boolean* | `true` | print each successfully added file path
 **skipIfExists** | *Boolean* | `false` | *inherited from [Add](#add)* (skips a file if it already exists)

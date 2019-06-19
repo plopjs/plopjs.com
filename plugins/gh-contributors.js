@@ -1,20 +1,23 @@
 const https = require('https');
 const fs = require('fs');
 const path = require('path');
+const mkdirp = require('mkdirp');
+const sharp = require('sharp');
 const repos = ['amwmedia/plop', 'amwmedia/node-plop', 'plopjs/plopjs.com'];
 const blacklist = ['greenkeeper[bot]'];
 
 module.exports = function (config) {
+	let firstRun = true;
 	return function (files, metalsmith, done) {
 		var meta = metalsmith.metadata();
 		var contributorData = {};
 
-		if (process.env.NODE_ENV !== 'production') {
+		if (firstRun) {firstRun = false;}
+		else {
 			meta.contributors = require('./mock-contributors.json');
 			console.log('MOCK contributors: ', meta.contributors.length);
 			done(); return;
 		}
-
 
 		repos.forEach(function (repoName) {
 			const requestConfig = {
@@ -63,8 +66,8 @@ module.exports = function (config) {
 			contributors.sort(function (a, b) {
 				const aVal = a.contributions;
 				const bVal = b.contributions;
-				if (bVal < aVal) { return -1; }
-				if (aVal > bVal) { return 1; }
+				if (aVal > bVal) { return -1; }
+				if (bVal > aVal) { return 1; }
 				return 0;
 			});
 
@@ -82,12 +85,17 @@ module.exports = function (config) {
 			const host = 'avatars.githubusercontent.com';
 			const headers = {'user-agent': 'Mozilla/5.0'};
 			var avatarCount = contributors.length;
+			const avatarDir = path.resolve(metalsmith._destination, 'images', 'avatars');
+			mkdirp.sync(avatarDir);
+
 			contributors.forEach(function (c) {
-				var avatarFile = fs.createWriteStream(path.resolve(__dirname, '../content/images/avatars', c.login + '.jpg'));
+				const imgPath = path.join(avatarDir, c.login + '.jpg');
+				var avatarFile = fs.createWriteStream(imgPath);
+				const avatarCompress = sharp().resize(200, 200).jpeg({quality: 85, progressive: true});
 				avatarFile.on('finish', () => (--avatarCount === 0 ? done() : null));
 				var request = https.get(
 					{host, headers, path:`/u/${c.id}?v=3`},
-					response => response.pipe(avatarFile)
+					response => response.pipe(avatarCompress).pipe(avatarFile)
 				);
 			});
 		}
