@@ -2,12 +2,12 @@
 	<div class="content-wrap">
 		<h2>Big Thanks to All Contributors!</h2>
 		<ul>
-			{{#each contributors as |c idx|}}{{#if (greater-than c.contributions 4)}}
+			{{#each contributors as |c idx|}}{{#if (greater-than c.contributions 10)}}
 			{{> index/contributor shout-out=false ctx=c }}
 			{{/if}}{{/each}}
 		</ul>
 		<ul>
-			{{#each contributors as |c idx|}}{{#if (less-than c.contributions 5)}}
+			{{#each contributors as |c idx|}}{{#if (less-than c.contributions 11)}}
 			{{> index/contributor shout-out=true ctx=c }}
 			{{/if}}{{/each}}
 		</ul>
