@@ -66,8 +66,8 @@ module.exports = function (config) {
 			contributors.sort(function (a, b) {
 				const aVal = a.contributions;
 				const bVal = b.contributions;
-				if (bVal < aVal) { return -1; }
-				if (aVal > bVal) { return 1; }
+				if (aVal > bVal) { return -1; }
+				if (bVal > aVal) { return 1; }
 				return 0;
 			});
 
