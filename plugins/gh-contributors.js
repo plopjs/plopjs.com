@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const mkdirp = require('mkdirp');
 const sharp = require('sharp');
-const repos = ['amwmedia/plop', 'amwmedia/node-plop', 'plopjs/plopjs.com'];
+const repos = ['plopjs/plop', 'plopjs/node-plop', 'plopjs/plopjs.com'];
 const blacklist = ['greenkeeper[bot]'];
 
 module.exports = function (config) {

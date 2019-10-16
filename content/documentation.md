@@ -3,7 +3,7 @@ title: Learning to Plop
 layout: documentation.hbs
 ---
 # Getting Started
-`plop v2.4.0`
+`plop v2.5.0`
 
 [![npm](https://img.shields.io/npm/dm/plop.svg)](https://www.npmjs.com/package/plop)
 &nbsp;
@@ -127,6 +127,29 @@ Because [context switching is expensive](http://www.petrikainulainen.net/softwar
 
 # Plopfile Api
 The plopfile api is the collection of methods that are exposed by the `plop` object. Most of the work is done by [`setGenerator`](#setgenerator) but this section documents the other methods that you may also find useful in your plopfile.
+
+## TypeScript Declarations
+
+`plop` bundles TypeScript declarations.  Whether or not you write your plopfile in TypeScript, many editors will offer code assistance via these declarations.
+
+```javascript
+// plopfile.ts
+import {NodePlopAPI} from 'plop';
+
+export default function (plop: NodePlopAPI) {
+  // plop generator code
+};
+```
+
+```javascript
+// plopfile.js
+module.exports = function (
+	/** @type {import('plop').NodePlopAPI} */
+	plop
+) {
+	// plop generator code
+};
+```
 
 ## Main Methods
 These are the methods you will commonly use when creating a plopfile. Other methods that are mostly for internal use are list in the [other methods](#other-methods) section.
