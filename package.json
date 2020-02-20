@@ -4,8 +4,8 @@
   "description": "plopjs.com website",
   "private": true,
   "scripts": {
-    "build": "NODE_ENV=production node metalsmith.js",
-    "develop": "node metalsmith.js",
+    "build": "NODE_ENV=production node docs-from-github.js && node metalsmith.js",
+    "develop": "node docs-from-github.js && node metalsmith.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "browserify": "^16.5.0",
-    "handlebars": "^4.4.3",
+    "handlebars": "^4.7.3",
     "metalsmith": "^2.1.0",
     "metalsmith-browser-sync": "^1.1.1",
     "metalsmith-browserify": "^1.1.0",
@@ -39,6 +39,7 @@
     "metalsmith-uglifyjs": "^0.2.2",
     "mkdirp": "^0.5.1",
     "nib": "^1.1.2",
+    "node-fetch": "^2.6.0",
     "sharp": "^0.22.1",
     "uglifyify": "^5.0.2"
   },
