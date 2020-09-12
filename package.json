@@ -39,7 +39,7 @@
     "metalsmith-uglifyjs": "^0.2.2",
     "mkdirp": "^0.5.1",
     "nib": "^1.1.2",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "sharp": "^0.22.1",
     "uglifyify": "^5.0.2"
   },
