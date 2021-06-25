@@ -10,16 +10,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://amwmedia@github.com/amwmedia/plopjs.com.git"
+    "url": "git+https://github.com/plopjs/plopjs.com.git"
   },
   "keywords": [
     "plop"
   ],
   "author": "Andrew Worcester",
   "license": "MIT",
-  "homepage": "https://github.com/amwmedia/plopjs.com#readme",
+  "homepage": "https://github.com/plopjs/plopjs.com#readme",
   "bugs": {
-    "url": "https://github.com/amwmedia/plopjs.com/issues"
+    "url": "https://github.com/plopjs/plopjs.com/issues"
   },
   "dependencies": {
     "browserify": "^16.5.0",
