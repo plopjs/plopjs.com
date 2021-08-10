@@ -43,11 +43,11 @@
     "nib": "^1.1.2",
     "node-fetch": "^2.6.1",
     "sharp": "^0.28.3",
+    "cross-env": "^7.0.3",
     "uglifyify": "^5.0.2"
   },
   "devDependencies": {
     "chokidar-cli": "^1.2.3",
-    "cross-env": "^7.0.3",
     "plop": "^2.7.4",
     "watchify": "^3.11.1"
   }
