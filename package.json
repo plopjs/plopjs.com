@@ -4,7 +4,7 @@
   "description": "plopjs.com website",
   "private": true,
   "scripts": {
-    "build": "NODE_ENV=production node docs-from-github.js && node metalsmith.js",
+    "build": "cross-env NODE_ENV=production npm run develop",
     "develop": "node docs-from-github.js && node metalsmith.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,6 +20,9 @@
   "homepage": "https://github.com/plopjs/plopjs.com#readme",
   "bugs": {
     "url": "https://github.com/plopjs/plopjs.com/issues"
+  },
+  "engines": {
+    "node": ">=14.17.4"
   },
   "dependencies": {
     "browserify": "^16.5.0",
@@ -44,6 +47,7 @@
   },
   "devDependencies": {
     "chokidar-cli": "^1.2.3",
+    "cross-env": "^7.0.3",
     "plop": "^2.7.4",
     "watchify": "^3.11.1"
   }
