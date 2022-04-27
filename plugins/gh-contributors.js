@@ -39,28 +39,24 @@ export default function (config) {
     .then(() => processWhenDone(contributorData));
 
     function processWhenDone(data) {
-      var contributors;
+      var contributors = [];
       if (Object.keys(data).sort().join("|") !== repos.sort().join("|")) {
         return;
       }
 
       repos.forEach(function (repo) {
-        if (contributors == null) {
-          contributors = data[repo].filter((c) => c.type === "User");
-        } else {
-          data[repo]
-            .filter((c) => c.type === "User")
-            .forEach(function (contributor) {
-              const existingC = contributors.find(
-                (c) => c.login === contributor.login
-              );
-              if (existingC == null) {
-                contributors.push(contributor);
-              } else {
-                existingC.contributions += contributor.contributions;
-              }
-            });
-        }
+        data[repo]
+          .filter((c) => c.type === "User")
+          .forEach(function (contributor) {
+            const existingC = contributors.find(
+              (c) => c.login === contributor.login
+            );
+            if (existingC == null) {
+              contributors.push(contributor);
+            } else {
+              existingC.contributions += contributor.contributions;
+            }
+          });
       });
 
       contributors.sort(function (a, b) {
@@ -101,8 +97,9 @@ export default function (config) {
       const imageBatches = contributors.reduce((batches, c) => {
         const url = `https://github.com/${c.login}.png?size=200`;
         const filePath = path.join(avatarDir, `${c.login}.png`);
-        if (batches.at(-1).length < 6) {
-          batches.at(-1).push({ url, filePath });
+        const lastBatch = batches[batches.length - 1];
+        if (lastBatch.length < 6) {
+          lastBatch.push({ url, filePath });
         } else {
           batches.push([{ url, filePath }]);
         }
