@@ -1,6 +1,5 @@
+const {basename} = require('path');
+
 module.exports = function (path) {
-	return path.substring(
-		path.lastIndexOf('/') + 1,
-		path.lastIndexOf('.')
-	);
+	return basename(path).split('.')[0];
 }
