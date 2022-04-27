@@ -1,11 +1,14 @@
-const https = require("https");
-const fs = require("fs");
-const path = require("path");
-const mkdirp = require("mkdirp");
-const sharp = require("sharp");
+import * as https from "https";
+import * as fs from "fs";
+import * as path from "path";
+import { fileURLToPath } from 'url';
+import mkdirp from "mkdirp";
+import sharp from "sharp";
 const repos = ["plopjs/plop", "plopjs/node-plop", "plopjs/plopjs.com"];
 
-module.exports = function (config) {
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+export default function (config) {
   let firstRun = true;
   return function (files, metalsmith, done) {
     var meta = metalsmith.metadata();

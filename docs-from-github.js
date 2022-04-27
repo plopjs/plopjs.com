@@ -1,7 +1,5 @@
-const https = require('https');
-const fs = require('fs');
-const path = require('path');
-const fetch = require('node-fetch');
+import * as fs from 'fs';
+import fetch from 'node-fetch';
 
 const cfg = {headers: {'user-agent': 'Mozilla/5.0'}};
 Promise.all([

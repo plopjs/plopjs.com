@@ -1,7 +1,7 @@
 {
   "name": "plopjs.com",
   "version": "1.0.1",
-  "type": "commonjs",
+  "type": "module",
   "description": "plopjs.com website",
   "private": true,
   "scripts": {
@@ -34,7 +34,7 @@
     "metalsmith-browserify": "^1.1.0",
     "metalsmith-browserify-alt": "^2.0.0",
     "metalsmith-collections": "^0.9.0",
-    "metalsmith-html-minifier": "^3.0.3",
+    "metalsmith-html-minifier": "^4.0.1",
     "metalsmith-layouts": "^1.8.1",
     "metalsmith-markdown": "^0.2.2",
     "metalsmith-permalinks": "^0.5.0",
@@ -43,13 +43,13 @@
     "metalsmith-stylus": "^3.0.0",
     "mkdirp": "^0.5.1",
     "nib": "^1.1.2",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^3.2.3",
     "sharp": "^0.30.4",
     "uglifyify": "^5.0.2"
   },
   "devDependencies": {
-    "chokidar-cli": "^1.2.3",
+    "chokidar-cli": "^3.0.0",
     "plop": "^3.0.6",
-    "watchify": "^3.11.1"
+    "watchify": "^4.0.0"
   }
 }
