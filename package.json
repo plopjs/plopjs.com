@@ -26,9 +26,10 @@
     "node": ">=14.17.4"
   },
   "dependencies": {
-    "browserify": "^16.5.0",
+    "browserify": "^17.0.0",
+    "cross-env": "^7.0.3",
     "handlebars": "^4.7.7",
-    "metalsmith": "^2.1.0",
+    "metalsmith": "^2.4.2",
     "metalsmith-browser-sync": "^1.1.1",
     "metalsmith-browserify": "^1.1.0",
     "metalsmith-browserify-alt": "^2.0.0",
@@ -37,14 +38,13 @@
     "metalsmith-layouts": "^1.8.1",
     "metalsmith-markdown": "^0.2.2",
     "metalsmith-permalinks": "^0.5.0",
-    "metalsmith-register-helpers": "^0.4.0",
+    "metalsmith-register-helpers": "^0.4.1",
     "metalsmith-register-partials": "^1.0.2",
     "metalsmith-stylus": "^3.0.0",
     "mkdirp": "^0.5.1",
     "nib": "^1.1.2",
     "node-fetch": "^2.6.1",
-    "sharp": "^0.28.3",
-    "cross-env": "^7.0.3",
+    "sharp": "^0.30.4",
     "uglifyify": "^5.0.2"
   },
   "devDependencies": {
