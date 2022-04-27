@@ -1,13 +1,15 @@
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import markdown from "metalsmith-markdown";
+import markdown from "@metalsmith/markdown";
 import registerHelpers from "metalsmith-register-helpers";
-import permalinks from "metalsmith-permalinks";
-import layouts from "metalsmith-layouts";
+import permalinks from "@metalsmith/permalinks";
+import layouts from "@metalsmith/layouts";
 import browserify from "metalsmith-browserify-alt";
 import stylus from "metalsmith-stylus";
 import browserSync from "metalsmith-browser-sync";
 import htmlMinify from "metalsmith-html-minifier";
+import discoverPartials from 'metalsmith-discover-partials';
+import filenames from "metalsmith-filenames";
 import nib from "nib";
 // custom plugins
 import mdLeftNav from "./plugins/md-left-nav.js";
@@ -33,12 +35,12 @@ var ms = metalsmith(__dirname)
   .use(mdLeftNav())
   .use(permalinks({ relative: false }))
   .use(registerHelpers())
-  .use(
-    layouts({
-      engine: "handlebars",
-      partials: "partials",
-    })
-  )
+  .use(discoverPartials({
+    directory: 'partials',
+    pattern: /\.hbs$/
+  }))
+  .use(filenames())
+  .use(layouts())
   .use(htmlMinify())
   .use(
     stylus({

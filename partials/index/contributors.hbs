@@ -3,12 +3,12 @@
 		<h2>Big Thanks to All Contributors!</h2>
 		<ul>
 			{{#each contributors as |c idx|}}{{#if (greater-than c.contributions 10)}}
-			{{> index/contributor shout-out=false ctx=c }}
+			{{> contributor shout-out=false ctx=c }}
 			{{/if}}{{/each}}
 		</ul>
 		<ul>
 			{{#each contributors as |c idx|}}{{#if (less-than c.contributions 11)}}
-			{{> index/contributor shout-out=true ctx=c }}
+			{{> contributor shout-out=true ctx=c }}
 			{{/if}}{{/each}}
 		</ul>
 	</div>
