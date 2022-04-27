@@ -1,6 +1,7 @@
 {
   "name": "plopjs.com",
   "version": "1.0.1",
+  "type": "commonjs",
   "description": "plopjs.com website",
   "private": true,
   "scripts": {
@@ -48,7 +49,7 @@
   },
   "devDependencies": {
     "chokidar-cli": "^1.2.3",
-    "plop": "^2.7.4",
+    "plop": "^3.0.6",
     "watchify": "^3.11.1"
   }
 }
