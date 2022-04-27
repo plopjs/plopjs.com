@@ -3,7 +3,7 @@ import fetch from 'node-fetch';
 
 const cfg = {headers: {'user-agent': 'Mozilla/5.0'}};
 Promise.all([
-	fetch('https://raw.githubusercontent.com/plopjs/plop/master/README.md', cfg).then(res => res.text()),
+	fetch('https://raw.githubusercontent.com/plopjs/plop/main/README.md', cfg).then(res => res.text()),
 	fetch('https://api.github.com/repos/plopjs/plop/releases/latest', cfg).then(res => res.json())
 ])
 .then(([docsTxt, releaseJson]) => {
