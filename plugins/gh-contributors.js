@@ -1,9 +1,8 @@
-import * as https from "https";
+import fetch from 'node-fetch';
 import * as fs from "fs";
 import * as path from "path";
 import { fileURLToPath } from 'url';
 import mkdirp from "mkdirp";
-import sharp from "sharp";
 const repos = ["plopjs/plop", "plopjs/node-plop", "plopjs/plopjs.com"];
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -17,36 +16,27 @@ export default function (config) {
     if (firstRun) {
       firstRun = false;
     } else {
-      meta.contributors = require("./mock-contributors.json");
+      const jsonRawText = fs.readFileSync("./plugins/mock-contributors.json");
+      meta.contributors = JSON.parse(jsonRawText);
+      meta.top5Contributors = contributors.slice(0, 5);
+      meta.restOfContributors = contributors.slice(5);
       console.log("MOCK contributors: ", meta.contributors.length);
       done();
       return;
     }
 
-    repos.forEach(function (repoName) {
-      const requestConfig = {
-        host: "api.github.com",
-        path: `/repos/${repoName}/contributors`,
-        headers: { "user-agent": "Mozilla/5.0" },
-      };
-
-      https
-        .get(requestConfig, function (res) {
-          var body = "";
-
-          res.on("data", function (chunk) {
-            body += chunk;
-          });
-          res.on("end", function () {
-            contributorData[repoName] = JSON.parse(body);
-            processWhenDone(contributorData);
-          });
+    Promise.all(repos.map(repoName => (
+      fetch(`https://api.github.com/repos/${repoName}/contributors`)
+        .then(res => res.json())
+        .then(json => {
+          contributorData[repoName] = json;
         })
-        .on("error", function (err) {
+        .catch(err => {
           console.log("ERROR!", err);
           done();
-        });
-    });
+        })
+    )))
+    .then(() => processWhenDone(contributorData));
 
     function processWhenDone(data) {
       var contributors;
@@ -86,6 +76,8 @@ export default function (config) {
       });
 
       meta.contributors = contributors;
+      meta.top5Contributors = contributors.slice(0, 5);
+      meta.restOfContributors = contributors.slice(5);
 
       fs.writeFile(
         path.resolve(__dirname, "./mock-contributors.json"),
@@ -98,9 +90,6 @@ export default function (config) {
       );
 
       // go update the avatar images
-      const host = "avatars.githubusercontent.com";
-      const headers = { "user-agent": "Mozilla/5.0" };
-      var avatarCount = contributors.length;
       const avatarDir = path.resolve(
         metalsmith._destination,
         "images",
@@ -108,18 +97,29 @@ export default function (config) {
       );
       mkdirp.sync(avatarDir);
 
-      contributors.forEach(function (c) {
-        const imgPath = path.join(avatarDir, c.login + ".jpg");
-        var avatarFile = fs.createWriteStream(imgPath);
-        const avatarCompress = sharp()
-          .resize(200, 200)
-          .jpeg({ quality: 85, progressive: true });
-        avatarFile.on("finish", () => (--avatarCount === 0 ? done() : null));
-        var request = https.get(
-          { host, headers, path: `/u/${c.id}?v=3` },
-          (response) => response.pipe(avatarCompress).pipe(avatarFile)
-        );
-      });
+      // Create batches of 6 avatar image downloads
+      const imageBatches = contributors.reduce((batches, c) => {
+        const url = `https://github.com/${c.login}.png?size=200`;
+        const filePath = path.join(avatarDir, `${c.login}.png`);
+        if (batches.at(-1).length < 6) {
+          batches.at(-1).push({ url, filePath });
+        } else {
+          batches.push([{ url, filePath }]);
+        }
+        return batches;
+      }, [[]])
+
+      // Load avatar images in batches so github's api doesn't block us
+      imageBatches.reduce((p, batch) => p.then(() => Promise.all(
+        batch.map(({url, filePath}) => fetch(url)
+          .then(res => res.body.pipe(fs.createWriteStream(filePath)))
+        )
+      )), Promise.resolve())
+      .catch(err => {
+        console.log('ERROR', err);
+        done();
+      })
+      .finally(() => done());
     }
   };
 };

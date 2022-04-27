@@ -36,7 +36,6 @@
     "jstransformer-handlebars": "^1.2.0",
     "metalsmith": "^2.4.2",
     "metalsmith-browser-sync": "^1.1.1",
-    "metalsmith-browserify": "^1.1.0",
     "metalsmith-browserify-alt": "^2.0.0",
     "metalsmith-discover-partials": "^0.1.2",
     "metalsmith-filenames": "^1.0.0",
@@ -47,7 +46,6 @@
     "mkdirp": "^1.0.4",
     "nib": "^1.1.2",
     "node-fetch": "^3.2.3",
-    "sharp": "^0.30.4",
     "uglifyify": "^5.0.2"
   },
   "devDependencies": {

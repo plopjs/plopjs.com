@@ -23,12 +23,12 @@ var ms = metalsmith(__dirname)
   .destination("./build")
   .clean(true)
   .use((files, metalsmith, done) => {
-    setImmediate(done);
     metalsmith.metadata({
       name: "PLOP",
       title: "Consistency Made Simple",
       production: process.env.NODE_ENV === "production",
     });
+    setImmediate(done);
   })
   .use(ghContributors())
   .use(markdown())

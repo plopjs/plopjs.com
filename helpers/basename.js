@@ -1,5 +1,3 @@
-const {basename} = require('path');
-
 module.exports = function (path) {
-	return basename(path).split('.')[0];
+  return path.split(/[\/\.]/g)[0];
 }
