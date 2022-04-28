@@ -12,3 +12,5 @@ node_modules
 
 plugins/mock-contributors.json
 content/documentation.md
+
+.idea/

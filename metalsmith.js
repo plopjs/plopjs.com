@@ -1,41 +1,46 @@
-const markdown = require("metalsmith-markdown");
-const registerHelpers = require("metalsmith-register-helpers");
-const permalinks = require("metalsmith-permalinks");
-const layouts = require("metalsmith-layouts");
-const browserify = require("metalsmith-browserify-alt");
-const stylus = require("metalsmith-stylus");
-const browserSync = require("metalsmith-browser-sync");
-const collections = require("metalsmith-collections");
-const htmlMinify = require("metalsmith-html-minifier");
-const nib = require("nib");
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+import markdown from "@metalsmith/markdown";
+import registerHelpers from "metalsmith-register-helpers";
+import permalinks from "@metalsmith/permalinks";
+import layouts from "@metalsmith/layouts";
+import browserify from "metalsmith-browserify-alt";
+import stylus from "metalsmith-stylus";
+import browserSync from "metalsmith-browser-sync";
+import htmlMinify from "metalsmith-html-minifier";
+import discoverPartials from 'metalsmith-discover-partials';
+import filenames from "metalsmith-filenames";
+import nib from "nib";
 // custom plugins
-const mdLeftNav = require("./plugins/md-left-nav");
-const ghContributors = require("./plugins/gh-contributors");
+import mdLeftNav from "./plugins/md-left-nav.js";
+import ghContributors from "./plugins/gh-contributors.js";
 
-const metalsmith = require("metalsmith");
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+import metalsmith from "metalsmith";
 var ms = metalsmith(__dirname)
   .source("./content")
   .destination("./build")
   .clean(true)
   .use((files, metalsmith, done) => {
-    setImmediate(done);
     metalsmith.metadata({
       name: "PLOP",
       title: "Consistency Made Simple",
       production: process.env.NODE_ENV === "production",
     });
+    setImmediate(done);
   })
   .use(ghContributors())
   .use(markdown())
   .use(mdLeftNav())
   .use(permalinks({ relative: false }))
   .use(registerHelpers())
-  .use(
-    layouts({
-      engine: "handlebars",
-      partials: "partials",
-    })
-  )
+  .use(discoverPartials({
+    directory: 'partials',
+    pattern: /\.hbs$/
+  }))
+  .use(filenames())
+  .use(layouts())
   .use(htmlMinify())
   .use(
     stylus({

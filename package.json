@@ -1,6 +1,7 @@
 {
   "name": "plopjs.com",
   "version": "1.0.1",
+  "type": "module",
   "description": "plopjs.com website",
   "private": true,
   "scripts": {
@@ -25,30 +26,31 @@
     "node": ">=14.17.4"
   },
   "dependencies": {
-    "browserify": "^16.5.0",
+    "@metalsmith/collections": "^1.2.1",
+    "@metalsmith/layouts": "^2.4.0",
+    "@metalsmith/markdown": "^1.5.0",
+    "@metalsmith/permalinks": "^2.4.0",
+    "browserify": "^17.0.0",
+    "cross-env": "^7.0.3",
     "handlebars": "^4.7.7",
-    "metalsmith": "^2.1.0",
+    "jstransformer-handlebars": "^1.2.0",
+    "metalsmith": "^2.4.2",
     "metalsmith-browser-sync": "^1.1.1",
-    "metalsmith-browserify": "^1.1.0",
     "metalsmith-browserify-alt": "^2.0.0",
-    "metalsmith-collections": "^0.9.0",
-    "metalsmith-html-minifier": "^3.0.3",
-    "metalsmith-layouts": "^1.8.1",
-    "metalsmith-markdown": "^0.2.2",
-    "metalsmith-permalinks": "^0.5.0",
-    "metalsmith-register-helpers": "^0.4.0",
+    "metalsmith-discover-partials": "^0.1.2",
+    "metalsmith-filenames": "^1.0.0",
+    "metalsmith-html-minifier": "^4.0.1",
+    "metalsmith-register-helpers": "^0.4.1",
     "metalsmith-register-partials": "^1.0.2",
     "metalsmith-stylus": "^3.0.0",
-    "mkdirp": "^0.5.1",
+    "mkdirp": "^1.0.4",
     "nib": "^1.1.2",
-    "node-fetch": "^2.6.1",
-    "sharp": "^0.28.3",
-    "cross-env": "^7.0.3",
+    "node-fetch": "^3.2.3",
     "uglifyify": "^5.0.2"
   },
   "devDependencies": {
-    "chokidar-cli": "^1.2.3",
-    "plop": "^2.7.4",
-    "watchify": "^3.11.1"
+    "chokidar-cli": "^3.0.0",
+    "plop": "^3.0.6",
+    "watchify": "^4.0.0"
   }
 }

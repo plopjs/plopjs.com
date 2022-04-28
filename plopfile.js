@@ -1,4 +1,4 @@
-module.exports = function (plop) {
+export default function (plop) {
 
 	// plop-new-component-slot
 	plop.setGenerator('component', {
