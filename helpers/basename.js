@@ -1,3 +1,3 @@
 module.exports = function (path) {
-  return path.split(/[\/\.]/g)[0];
+  return path.split(/[\/\.\\]/g)[0];
 }
