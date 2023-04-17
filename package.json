@@ -45,7 +45,7 @@
     "metalsmith-stylus": "^3.0.0",
     "mkdirp": "^1.0.4",
     "nib": "^1.1.2",
-    "node-fetch": "^3.2.3",
+    "node-fetch": "^3.2.10",
     "uglifyify": "^5.0.2"
   },
   "devDependencies": {
