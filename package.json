@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "build": "cross-env NODE_ENV=production npm run develop",
-    "develop": "node docs-from-github.js && node metalsmith.js",
+    "develop": "cross-env NODE_NO_WARNINGS=1 node docs-from-github.js && cross-env NODE_NO_WARNINGS=1 node metalsmith.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
