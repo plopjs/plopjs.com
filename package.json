@@ -22,9 +22,6 @@
   "bugs": {
     "url": "https://github.com/plopjs/plopjs.com/issues"
   },
-  "engines": {
-    "node": ">=14.17.4"
-  },
   "dependencies": {
     "@metalsmith/collections": "^1.2.1",
     "@metalsmith/layouts": "^2.4.0",
