@@ -41,16 +41,21 @@
     "metalsmith-filenames": "^1.0.0",
     "metalsmith-html-minifier": "^4.0.1",
     "metalsmith-register-helpers": "^0.4.1",
-    "metalsmith-register-partials": "^1.0.2",
     "metalsmith-stylus": "^3.0.0",
     "mkdirp": "^1.0.4",
     "nib": "^1.1.2",
     "node-fetch": "^3.2.3",
-    "uglifyify": "^5.0.2"
+    "uglifyify": "^5.0.0"
   },
   "devDependencies": {
     "chokidar-cli": "^3.0.0",
     "plop": "^3.0.6",
     "watchify": "^4.0.0"
+  },
+  "overrides": {
+    "axios": "^1.7.0",
+    "send": "^0.19.0",
+    "serve-static": "^1.16.0",
+    "lodash": "^4.17.21"
   }
 }
